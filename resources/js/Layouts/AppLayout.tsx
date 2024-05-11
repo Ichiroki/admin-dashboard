@@ -12,6 +12,7 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Team } from '@/types';
 import ApplicationLogo from '@/Components/ApplicationLogo';
+import Sidebar from '@/Components/Sidebar';
 
 interface Props {
   title: string;
@@ -53,21 +54,7 @@ export default function AppLayout({
       <Banner />
 
       <div className='min-h-screen w-3/12 bg-violet-400 text-lg'>
-        <nav className='flex justify-center'>
-            <ul className='w-9/12 flex gap-3 flex-col mt-6'>
-                <li>
-                    <Link href={route('dashboard')}>
-                        <ApplicationLogo className="block h-9 w-auto" />
-                    </Link>
-                </li>
-                <li><NavLink href="">Home</NavLink></li>
-                <li><NavLink href="">User</NavLink></li>
-                <li><NavLink href="">Product</NavLink></li>
-                {/* <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li> */}
-            </ul>
-        </nav>
+        <Sidebar />
       </div>
     </div>
   );
