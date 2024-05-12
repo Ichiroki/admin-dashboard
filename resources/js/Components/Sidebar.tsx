@@ -1,15 +1,13 @@
-import { Link } from '@inertiajs/react';
-import React from 'react'
-import ApplicationLogo from './ApplicationLogo';
-import NavLink from './NavLink';
+import clsx from 'clsx';
+import React from 'react';
 import route from 'ziggy-js';
 import { Icon } from './Icons';
-import clsx from 'clsx';
+import NavLink from './NavLink';
 
 function Sidebar() {
     return (
         <>
-            <nav className={clsx('flex justify-center text-lg bg-violet-400 sidebar sidebar h-screen')}>
+            <nav className={clsx('hidden justify-center text-lg bg-violet-400 h-screen')}>
             <ul className='w-9/12 flex gap-3 flex-col'>
                 <li className='mt-6'>
                     <NavLink href={route('dashboard')} active={route().current('dashboard')}>

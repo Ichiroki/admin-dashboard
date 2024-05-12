@@ -48,13 +48,9 @@ export default function AppLayout({
   }
 
   return (
-    <div className='layout'>
-      <Head title={title} />
-
-      {/* <Banner /> */}
-
-      <div className='min-h-screen w-[19%]'>
-        <div className="navigation">
+    <div>
+      <div className='min-h-screen flex flex-col'>
+        <div>
             <nav className='flex justify-between items-center bg-violet-400 w-screen px-8 py-5'>
                 <Link href={route('dashboard')}>
                     <ApplicationLogo className="block h-9 w-auto" />
@@ -119,15 +115,27 @@ export default function AppLayout({
                     </form>
                   </Dropdown>
             </nav>
+            <Head title={title} />
+            {/* <Banner /> */}
+            {renderHeader ? <>
+                <header className='bg-violet-400 shadow'>
+                    <div className='max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8'>
+                        {renderHeader()}
+                    </div>
+                </header>
+            </> : <>
+            </>}
         </div>
-        <div>
-            <Sidebar />
-        </div>
-        <div className='main'>
-            test
-        </div>
-        <div className='footer'>
-            test
+        <div className='px-8 '>
+            <div>
+                <Sidebar />
+            </div>
+            <div>
+                <main className='mt-6 bg-violet-400 text-slate-50 p-5 rounded-lg'>
+                    <h1>test</h1>
+                    <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint quam odit accusamus doloremque molestias eaque reiciendis. Accusantium, quisquam. Aperiam eligendi perspiciatis ab excepturi molestiae nesciunt quos incidunt voluptatum nisi nulla!</p>
+                </main>
+            </div>
         </div>
       </div>
     </div>
