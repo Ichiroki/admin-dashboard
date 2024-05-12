@@ -13,6 +13,8 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Team } from '@/types';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import Sidebar from '@/Components/Sidebar';
+import { Icon } from '@/Components/Icons';
+import clsx from 'clsx';
 
 interface Props {
   title: string;
@@ -26,6 +28,9 @@ export default function AppLayout({
 }: PropsWithChildren<Props>) {
   const page = useTypedPage();
   const route = useRoute();
+
+  const [show, setShow] = useState(false)
+
   const [showingNavigationDropdown, setShowingNavigationDropdown] =
     useState(false);
 
@@ -55,65 +60,70 @@ export default function AppLayout({
                 <Link href={route('dashboard')}>
                     <ApplicationLogo className="block h-9 w-auto" />
                 </Link>
-                <Dropdown
-                    align="right"
-                    width="48"
-                    renderTrigger={() =>
-                      page.props.jetstream.managesProfilePhotos ? (
-                        <button className="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                          <img
-                            className="h-8 w-8 rounded-full object-cover"
-                            src={page.props.auth.user?.profile_photo_url}
-                            alt={page.props.auth.user?.name}
-                          />
-                        </button>
-                      ) : (
-                        <span className="inline-flex rounded-md">
-                          <button
-                            type="button"
-                            className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 active:bg-gray-50 dark:active:bg-gray-700 transition ease-in-out duration-150"
-                          >
-                            {page.props.auth.user?.name}
-
-                            <svg
-                              className="ml-2 -mr-0.5 h-4 w-4"
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
+                <div>
+                    <Dropdown
+                        align="right"
+                        width="48"
+                        renderTrigger={() =>
+                        page.props.jetstream.managesProfilePhotos ? (
+                            <button className="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                            <img
+                                className="h-8 w-8 rounded-full object-cover"
+                                src={page.props.auth.user?.profile_photo_url}
+                                alt={page.props.auth.user?.name}
+                            />
+                            </button>
+                        ) : (
+                            <span className="inline-flex rounded-md">
+                            <button
+                                type="button"
+                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 active:bg-gray-50 dark:active:bg-gray-700 transition ease-in-out duration-150"
                             >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                              />
-                            </svg>
-                          </button>
-                        </span>
-                      )
-                    }
-                  >
-                    {/* <!-- Account Management --> */}
-                    <div className="block px-4 py-2 text-xs text-gray-400">
-                      Manage Account
-                    </div>
+                                {page.props.auth.user?.name}
 
-                    <DropdownLink href={route('profile.show')}>
-                      Profile
-                    </DropdownLink>
+                                <svg
+                                className="ml-2 -mr-0.5 h-4 w-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                                />
+                                </svg>
+                            </button>
+                            </span>
+                        )
+                        }
+                    >
+                        {/* <!-- Account Management --> */}
+                        <div className="block px-4 py-2 text-xs text-gray-400">
+                        Manage Account
+                        </div>
 
-                    {page.props.jetstream.hasApiFeatures ? (
-                      <DropdownLink href={route('api-tokens.index')}>
-                        API Tokens
-                      </DropdownLink>
-                    ) : null}
+                        <DropdownLink href={route('profile.show')}>
+                        Profile
+                        </DropdownLink>
 
-                    <div className="border-t border-gray-200 dark:border-gray-600"></div>
+                        {page.props.jetstream.hasApiFeatures ? (
+                        <DropdownLink href={route('api-tokens.index')}>
+                            API Tokens
+                        </DropdownLink>
+                        ) : null}
 
-                    {/* <!-- Authentication --> */}
-                    <form onSubmit={logout}>
-                      <DropdownLink as="button">Log Out</DropdownLink>
-                    </form>
-                  </Dropdown>
+                        <div className="border-t border-gray-200 dark:border-gray-600"></div>
+
+                        {/* <!-- Authentication --> */}
+                        <form onSubmit={logout}>
+                        <DropdownLink as="button">Log Out</DropdownLink>
+                        </form>
+                    </Dropdown>
+                </div>
+                <div>
+                    <Icon iconName='List' className='w-8 h-8' color='white' onClick={() => setShow(!show)}/>
+                </div>
             </nav>
             <Head title={title} />
             {/* <Banner /> */}
@@ -128,7 +138,29 @@ export default function AppLayout({
         </div>
         <div className='px-8 '>
             <div>
-                <Sidebar />
+                <nav className={show ? clsx('flex justify-center text-lg bg-violet-400 h-screen relative') : clsx('hidden justify-center text-lg bg-violet-400 h-screen')}>
+                    <Icon iconName='X' color="white" onClick={() => show} />
+                    <ul className='w-9/12 flex gap-3 flex-col'>
+                        <li className='mt-6'>
+                            <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                <Icon color='white' iconName="HouseDoor" className='w-6 h-6 mr-4'/>
+                                <span className='text-sm'>Home</span>
+                            </NavLink>
+                        </li>
+                        <li className='flex gap-3 mt-3'>
+                            <NavLink href="">
+                                <Icon color='white' iconName="PersonLinesFill" className='w-6 h-6 mr-4' />
+                                <span className='text-sm'>User</span>
+                            </NavLink>
+                        </li>
+                        <li className='flex gap-3 mt-3'>
+                            <NavLink href="">
+                                <Icon color='white' iconName="Bag" className='w-6 h-6 mr-4'/>
+                                <span className='text-sm'>Product</span>
+                            </NavLink>
+                        </li>
+                    </ul>
+                </nav>
             </div>
             <div>
                 <main className='mt-6 bg-violet-400 text-slate-50 p-5 rounded-lg'>

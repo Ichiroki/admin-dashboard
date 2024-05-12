@@ -1,7 +1,9 @@
 import {
     HouseDoor,
     PersonLinesFill,
-    Bag
+    Bag,
+    List,
+    X
 } from 'react-bootstrap-icons'
 import {IconProps} from 'react-bootstrap-icons'
 import clsx from 'clsx'
@@ -10,7 +12,9 @@ import React from 'react'
 export const icons = {
     HouseDoor,
     PersonLinesFill,
-    Bag
+    Bag,
+    List,
+    X
 }
 
 interface Props extends IconProps {
