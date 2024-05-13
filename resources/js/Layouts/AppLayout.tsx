@@ -1,20 +1,15 @@
-import { router } from '@inertiajs/core';
-import { Link, Head } from '@inertiajs/react';
-import classNames from 'classnames';
-import React, { PropsWithChildren, useState } from 'react';
-import useRoute from '@/Hooks/useRoute';
-import useTypedPage from '@/Hooks/useTypedPage';
-import ApplicationMark from '@/Components/ApplicationMark';
-import Banner from '@/Components/Banner';
+import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import DropdownLink from '@/Components/DropdownLink';
-import NavLink from '@/Components/NavLink';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import { Team } from '@/types';
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import Sidebar from '@/Components/Sidebar';
 import { Icon } from '@/Components/Icons';
+import NavLink from '@/Components/NavLink';
+import useRoute from '@/Hooks/useRoute';
+import useTypedPage from '@/Hooks/useTypedPage';
+import { Team } from '@/types';
+import { router } from '@inertiajs/core';
+import { Head, Link } from '@inertiajs/react';
 import clsx from 'clsx';
+import React, { PropsWithChildren, useState } from 'react';
 
 interface Props {
   title: string;
@@ -60,6 +55,9 @@ export default function AppLayout({
                 <Link href={route('dashboard')}>
                     <ApplicationLogo className="block h-9 w-auto" />
                 </Link>
+                <div>
+                    <Icon iconName='List' className='w-8 h-8' color='white' onClick={() => setShow(!show)}/>
+                </div>
                 <div>
                     <Dropdown
                         align="right"
@@ -121,9 +119,6 @@ export default function AppLayout({
                         </form>
                     </Dropdown>
                 </div>
-                <div>
-                    <Icon iconName='List' className='w-8 h-8' color='white' onClick={() => setShow(!show)}/>
-                </div>
             </nav>
             <Head title={title} />
             {/* <Banner /> */}
@@ -136,11 +131,12 @@ export default function AppLayout({
             </> : <>
             </>}
         </div>
-        <div className='px-8 '>
+        <div className='px-8'>
             <div>
-                <nav className={show ? clsx('flex justify-center text-lg bg-violet-400 h-screen relative') : clsx('hidden justify-center text-lg bg-violet-400 h-screen')}>
-                    <Icon iconName='X' color="white" onClick={() => show} />
-                    <ul className='w-9/12 flex gap-3 flex-col'>
+                <div className={show ? clsx('w-full h-screen bg-slate-600/50 absolute top-0 left-0 block') : clsx('hidden')} id="overlay-sidebar" onClick={() => setShow(false)} />
+                <nav className={show ? clsx('flex justify-center text-lg bg-violet-400 h-screen absolute top-0 left-0 w-64 z-20 transition-[width] duration-300') : clsx('hidden')}>
+                    <Icon iconName='X' color="white" onClick={() => setShow(false)} className='absolute top-6 right-8 w-6 h-6' />
+                    <ul className='w-9/12 flex gap-3 flex-col mt-12'>
                         <li className='mt-6'>
                             <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                 <Icon color='white' iconName="HouseDoor" className='w-6 h-6 mr-4'/>
