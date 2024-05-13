@@ -1,6 +1,5 @@
-import React from 'react';
-import Welcome from '@/Components/Welcome';
 import AppLayout from '@/Layouts/AppLayout';
+import React from 'react';
 
 export default function Dashboard() {
   return (
@@ -12,7 +11,7 @@ export default function Dashboard() {
         </h2>
       )}
     >
-        <Welcome />
+        You are logged in !
     </AppLayout>
   );
 }

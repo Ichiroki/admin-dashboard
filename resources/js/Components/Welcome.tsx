@@ -4,14 +4,14 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 export default function Welcome() {
   return (
     <div>
-      <div className="p-6 lg:p-8 bg-white dark:bg-gray-800 dark:bg-gradient-to-bl dark:from-gray-700/50 dark:via-transparent border-b border-gray-200 dark:border-gray-700">
+      <div className="p-6 lg:p-8 dark:bg-gray-800 dark:bg-gradient-to-bl dark:from-gray-700/50 dark:via-transparent border-b border-gray-200 dark:border-gray-700">
         <ApplicationLogo className="block h-12 w-auto" />
 
-        <h1 className="mt-8 text-2xl font-medium text-gray-900 dark:text-white">
+        <h1 className="mt-8 text-2xl font-medium text-slate-50 dark:text-white">
           Welcome to your Jetstream application!
         </h1>
 
-        <p className="mt-6 text-gray-500 dark:text-gray-400 leading-relaxed">
+        <p className="mt-6 text-slate-50 dark:text-gray-400 leading-relaxed">
           Laravel Jetstream provides a beautiful, robust starting point for your
           next Laravel application. Laravel is designed to help you build your
           application using a development environment that is simple, powerful,
